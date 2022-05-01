@@ -1,0 +1,23 @@
+{
+  "name": "etch-a-sketch",
+  "version": "1.0.0",
+  "description": "Etch-A-Sketch for The Odin Project",
+  "main": "main_script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Postiey/Etch-A-Sketch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Postiey/Etch-A-Sketch/issues"
+  },
+  "homepage": "https://github.com/Postiey/Etch-A-Sketch#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
