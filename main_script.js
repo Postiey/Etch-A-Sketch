@@ -1,39 +1,31 @@
 // Etch-A-Sketch
 // Made by Postiey :)
 
+// Created box shadow
+// Created clearboard function and works properly
+// Setup resize buttons that all work correctly
 
-// To Do
-// Implement color picking html input
-// Clear grid function
-  // Dropdown box for asking if the user really wants to clear the grid
-// Allow users to choose a grid size
-  // Dropdown box to choose what size they would like, between a couple of different options
+const colorPickerBtn = document.querySelector('.colorPicker');
 
+const gridResize = document.querySelector('.gridResize');
+const gridDropdown = document.querySelector('.gridDropdown');
 
 const rainbowBtn = document.querySelector('.rainbow');
 const greyScaleBtn = document.querySelector('.greyscale');
 const clearBtn = document.querySelector('.resetGrid');
+
+const resetBoard = document.querySelector('.gridContainer');
+
+const btn1 = document.querySelector('.first');
+const btn2 = document.querySelector('.second');
+const btn3 = document.querySelector('.third');
+const btn4 = document.querySelector('.four');
+
+let customColor = false;
 let rainbow = false;
 let greyScale = false;
 let boardClear = false;
 
-rainbowBtn.addEventListener('click', e => {
-    if (rainbow != true) {
-        rainbow = true;
-        greyScale = false;
-    } else {
-        alert("You are already using the rainbow brush!");
-    }    
-});
-
-greyScaleBtn.addEventListener('click', e => {
-    if (greyScale != true) {
-        rainbow = false;
-        greyScale = true;
-    } else {
-        alert("You are already using the greyscale brush!");
-    }
-});
 
 function createBoard(size) {
     const board = document.querySelector('.gridContainer');
@@ -52,14 +44,18 @@ function createBoard(size) {
 
             if (greyScale === true) {
                 square.style.backgroundColor = randomGreyScale();
-                // square.style.backgroundColor = `black`;
-                // ;
             } else if (rainbow === true) {
                 square.style.backgroundColor = `rgb(${rainbowColor()}, ${rainbowColor()}, ${rainbowColor()})`;
             } 
         });
     }
 };
+
+// Clears the entire board
+function clearBoard() {
+    let reset = resetBoard;
+    reset.innerHTML = '';
+}
 
 // Creates a random rainbow color when the user drags their mouse over boxes.
 function rainbowColor() {
@@ -76,18 +72,47 @@ function randomGreyScale() {
     return colorCode;  
 }
 
-// Clears Grid
-
-clearBtn.addEventListener('click', e => {
-    if (boardClear === false) {
-        boardClear = true;
+// Event Listeners //
+rainbowBtn.addEventListener('click', e => {
+    if (rainbow != true) {
+        rainbow = true;
+        greyScale = false;
     } else {
-        alert("The board is already cleared!");
+        alert("You are already using the rainbow brush!");
+    }    
+});
+
+greyScaleBtn.addEventListener('click', e => {
+    if (greyScale != true) {
+        rainbow = false;
+        greyScale = true;
+    } else {
+        alert("You are already using the greyscale brush!");
     }
 });
 
+gridResize.addEventListener('click', e => {
+    gridDropdown.classList.toggle('notHidden');
+});
 
+btn1.addEventListener('click', e => {
+    clearBoard();
+    createBoard(8);
+});
 
+btn2.addEventListener('click', e => {
+    clearBoard();
+    createBoard(16);
+});
 
+btn3.addEventListener('click', e => {
+    clearBoard();
+    createBoard(32);
+});
 
-createBoard(10);
+btn4.addEventListener('click', e => {
+    clearBoard();
+    createBoard(64);
+});
+
+createBoard(16);
