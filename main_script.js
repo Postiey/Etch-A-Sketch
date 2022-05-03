@@ -1,9 +1,15 @@
 // Etch-A-Sketch
 // Made by Postiey :)
 
-// Created box shadow
-// Created clearboard function and works properly
-// Setup resize buttons that all work correctly
+// to do type shit
+    // Create grid lines toggle
+    // create different themes for the site and have the ability to choose between them
+    // maybe have it so that users can chose the background color or the sketch pad
+
+// Done list
+    // fnished cleargrid button and is working with each of the active boards (if user is on board 32x32 it will clear 
+    // and remake a 32x32 board).
+    // Cleargrid will reset to a 16x16 board
 
 const colorPickerBtn = document.querySelector('.colorPicker');
 
@@ -26,6 +32,11 @@ let rainbow = false;
 let greyScale = false;
 let boardClear = false;
 
+let btn1Active = false;
+let btn2Active = false;
+let btn3Active = false;
+let btn4Active = false;
+
 
 function createBoard(size) {
     const board = document.querySelector('.gridContainer');
@@ -37,6 +48,9 @@ function createBoard(size) {
     for (let i = 0; i <= gridSize; i++) {
         const square = document.createElement('div');
         square.style.backgroundColor = 'lightgray';
+        // Need to create a statement where if a div is touching another div, it will not create 2 borders.
+        // Also need to make the ability to toggle whether or not this is on or off
+        square.style.border = "1px solid black";
         board.appendChild(square);
 
         square.addEventListener('mouseenter', e => {
@@ -96,23 +110,62 @@ gridResize.addEventListener('click', e => {
 });
 
 btn1.addEventListener('click', e => {
+    btn1Active = true;
+    btn2Active = false;
+    btn3Active = false;
+    btn4Active = false;
     clearBoard();
     createBoard(8);
 });
 
 btn2.addEventListener('click', e => {
+    btn1Active = false;
+    btn2Active = true;
+    btn3Active = false;
+    btn4Active = false;
     clearBoard();
     createBoard(16);
 });
 
 btn3.addEventListener('click', e => {
+    btn1Active = false;
+    btn2Active = false;
+    btn3Active = true;
+    btn4Active = false;
     clearBoard();
     createBoard(32);
 });
 
 btn4.addEventListener('click', e => {
+    btn1Active = false;
+    btn2Active = false;
+    btn3Active = false;
+    btn4Active = true;
     clearBoard();
     createBoard(64);
 });
+
+clearBtn.addEventListener('click', e => {
+    if (btn1Active === true) {
+        clearBoard();
+        createBoard(8);
+    } else if (btn2Active === true) {
+        clearBoard();
+        createBoard(16);
+    } else if (btn3Active === true) {
+        clearBoard();
+        createBoard(32);
+    } else if (btn4Active === true) {
+        clearBoard();
+        createBoard(64);
+    } else {
+        clearBoard();
+        createBoard(16);
+    }
+    
+});
+
+// This will fully clear the board and not reload the board at all, need to figure this out.
+
 
 createBoard(16);
