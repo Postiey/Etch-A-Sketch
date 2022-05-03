@@ -34,3 +34,23 @@ body {
     align-items: center;
     margin-top: 20px;
 }
+
+
+
+/* Grid Dropdown menu */
+
+.gridMenu {
+    background-color: red;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 780px;
+    left: 748px;
+}
+
+.gridMenuContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
