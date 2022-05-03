@@ -91,3 +91,7 @@ body {
 .notHidden {
     display: flex;
 }
+
+.lines {
+    border: 1px solid black;
+}

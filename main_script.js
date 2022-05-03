@@ -15,6 +15,7 @@ const colorPickerBtn = document.querySelector('.colorPicker');
 
 const gridResize = document.querySelector('.gridResize');
 const gridDropdown = document.querySelector('.gridDropdown');
+const toggleGridlines = document.querySelector('.toggleGrid');
 
 const rainbowBtn = document.querySelector('.rainbow');
 const greyScaleBtn = document.querySelector('.greyscale');
@@ -37,6 +38,8 @@ let btn2Active = false;
 let btn3Active = false;
 let btn4Active = false;
 
+let toggleLines = false;
+
 
 function createBoard(size) {
     const board = document.querySelector('.gridContainer');
@@ -48,9 +51,12 @@ function createBoard(size) {
     for (let i = 0; i <= gridSize; i++) {
         const square = document.createElement('div');
         square.style.backgroundColor = 'lightgray';
-        // Need to create a statement where if a div is touching another div, it will not create 2 borders.
-        // Also need to make the ability to toggle whether or not this is on or off
-        square.style.border = "1px solid black";
+        // The clear will fully clear all the lines on the sketch pad
+        toggleGridlines.addEventListener('click', e => {
+            square.classList.toggle('lines');
+            
+        });
+        
         board.appendChild(square);
 
         square.addEventListener('mouseenter', e => {
@@ -165,7 +171,6 @@ clearBtn.addEventListener('click', e => {
     
 });
 
-// This will fully clear the board and not reload the board at all, need to figure this out.
 
 
 createBoard(16);
