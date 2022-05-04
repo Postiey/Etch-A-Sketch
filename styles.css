@@ -1,19 +1,32 @@
+/* Light color scheme */
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap');
+
+:root {
+    /* Light Color Scheme */
+    --light-bg-color: #276FBF;
+    --light-board-color: #F6F4F3;
+    --light-btn-color: #F03A47;
+    --light-secondary-color: #183059;
+}
+
 body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
+    background-color: var(--light-bg-color);
+    font-family: 'Radio Canada', sans-serif;
 }
 
-
 /* Grid */
-
 .header {
     text-align: center;
 }
 
 .header h1 {
     margin-top: 20px;
+    color: white;
+    font-size: 2rem;
 }
 
 .grid {
@@ -28,7 +41,7 @@ body {
 .gridContainer {
     height: 500px;
     width: 500px;
-    background-color: gray;
+    background-color: var(--light-board-color);
     display: grid;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
@@ -55,12 +68,12 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     background-color: transparent;
-    border: 2px solid black;
+    border: 2px solid var(--light-secondary-color);
     border-radius: 6px;
     cursor: pointer;
+    color: white;
+    font-size: 1rem;
 }
-
-
 
 /* Grid Dropdown menu */
 
@@ -74,8 +87,9 @@ body {
     justify-content: center;
     margin-top: 190px;
     margin-left: 140px;
-    background-color: #E0E1E1;
+    background-color: var(--light-secondary-color);
     padding: 20px;
+    border-radius: 8px;
 }
 
 .dropBtn {
@@ -83,9 +97,11 @@ body {
     margin-right: 5px;
     height: 40px;
     width: 90px;
-    background-color: transparent;
-    border: 2px solid black;
+    background-color: var(--light-btn-color);
+    border: 2px solid var(--light-btn-color);
     border-radius: 8px;
+    color: white;
+    font-size: 1rem;
 }
 
 .notHidden {
@@ -94,4 +110,8 @@ body {
 
 .lines {
     border: 1px solid black;
+}
+
+.btnActive {
+    background-color: var(--light-secondary-color);
 }

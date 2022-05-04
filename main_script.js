@@ -2,14 +2,12 @@
 // Made by Postiey :)
 
 // to do type shit
-    // Create grid lines toggle
     // create different themes for the site and have the ability to choose between them
-    // maybe have it so that users can chose the background color or the sketch pad
-
 // Done list
     // fnished cleargrid button and is working with each of the active boards (if user is on board 32x32 it will clear 
     // and remake a 32x32 board).
     // Cleargrid will reset to a 16x16 board
+    // Changed styles of the whole document, added active properties to buttons
 
 const colorPickerBtn = document.querySelector('.colorPicker');
 
@@ -18,8 +16,9 @@ const gridDropdown = document.querySelector('.gridDropdown');
 const toggleGridlines = document.querySelector('.toggleGrid');
 
 const rainbowBtn = document.querySelector('.rainbow');
-const greyScaleBtn = document.querySelector('.greyscale');
 const clearBtn = document.querySelector('.resetGrid');
+const coolColorBtn = document.querySelector('.coolColors');
+const warmColorBtn = document.querySelector('.warmColors');
 
 const resetBoard = document.querySelector('.gridContainer');
 
@@ -30,16 +29,16 @@ const btn4 = document.querySelector('.four');
 
 let customColor = false;
 let rainbow = false;
-let greyScale = false;
+let coolColor = false;
+let warmColor = false;
 let boardClear = false;
 
 let btn1Active = false;
 let btn2Active = false;
-let btn3Active = false;
+let btn3Active = true;
 let btn4Active = false;
 
 let toggleLines = false;
-
 
 function createBoard(size) {
     const board = document.querySelector('.gridContainer');
@@ -50,23 +49,20 @@ function createBoard(size) {
 
     for (let i = 0; i <= gridSize; i++) {
         const square = document.createElement('div');
-        square.style.backgroundColor = 'lightgray';
-        // The clear will fully clear all the lines on the sketch pad
-        toggleGridlines.addEventListener('click', e => {
-            square.classList.toggle('lines');
-            
-        });
+        square.style.backgroundColor = '#F6F4F3';
         
         board.appendChild(square);
 
         square.addEventListener('mouseenter', e => {
             square.style.backgroundColor = 'black';
 
-            if (greyScale === true) {
-                square.style.backgroundColor = randomGreyScale();
+            if (coolColor === true) {
+                square.style.backgroundColor = randomCoolColor();
             } else if (rainbow === true) {
                 square.style.backgroundColor = `rgb(${rainbowColor()}, ${rainbowColor()}, ${rainbowColor()})`;
-            } 
+            } else if (warmColor === true) {
+                square.style.backgroundColor = randomWarmColor();
+            }
         });
     }
 };
@@ -84,10 +80,18 @@ function rainbowColor() {
 }
 
 // Creates a greyscale pattern with an array of colors
-function randomGreyScale() {
-    let greyCodes = ['525252', '7A7A7A', 'D6D6D6', '000', '292929', '1C2122', '1C2735', '2F3D4F'];
+function randomCoolColor() {
+    let coolCodes = ['1D323F', '2D5D62', '77A8A3', 'A1C7C7', 'B9D3CD'];
     let randNum = Math.floor(Math.random() * 5);
-    let newNumber = greyCodes[randNum];
+    let newNumber = coolCodes[randNum];
+    let colorCode = "#" + newNumber;
+    return colorCode;  
+}
+
+function randomWarmColor() {
+    let warmCodes = ['540A15', '740819', 'AC132A', 'D03C2D', 'ECAD66'];
+    let randNum = Math.floor(Math.random() * 5);
+    let newNumber = warmCodes[randNum];
     let colorCode = "#" + newNumber;
     return colorCode;  
 }
@@ -96,23 +100,48 @@ function randomGreyScale() {
 rainbowBtn.addEventListener('click', e => {
     if (rainbow != true) {
         rainbow = true;
-        greyScale = false;
-    } else {
-        alert("You are already using the rainbow brush!");
+        coolColor = false;
+        warmColor = false;
+        rainbowBtn.classList.add('btnActive');
+        coolColorBtn.classList.remove('btnActive');
+        warmColorBtn.classList.remove('btnActive');
+    } else if (rainbow === true) {
+        rainbowBtn.classList.remove('btnActive');
+        rainbow = false;
     }    
 });
 
-greyScaleBtn.addEventListener('click', e => {
-    if (greyScale != true) {
+coolColorBtn.addEventListener('click', e => {
+    if (coolColor != true) {
         rainbow = false;
-        greyScale = true;
-    } else {
-        alert("You are already using the greyscale brush!");
+        coolColor = true;
+        warmColor = false;
+        rainbowBtn.classList.remove('btnActive');
+        coolColorBtn.classList.add('btnActive');
+        warmColorBtn.classList.remove('btnActive');
+    } else if (coolColor === true) {
+        coolColorBtn.classList.remove('btnActive');
+        coolColor = false;
+    }
+});
+
+warmColorBtn.addEventListener('click', e => {
+    if (warmColor != true) {
+        rainbow = false;
+        coolColor = false;
+        warmColor = true;
+        rainbowBtn.classList.remove('btnActive');
+        coolColorBtn.classList.remove('btnActive');
+        warmColorBtn.classList.add('btnActive');
+    } else if (warmColor === true) {
+        warmColorBtn.classList.remove('btnActive');
+        warmColor = false;
     }
 });
 
 gridResize.addEventListener('click', e => {
     gridDropdown.classList.toggle('notHidden');
+    gridResize.classList.toggle('btnActive');
 });
 
 btn1.addEventListener('click', e => {
@@ -120,6 +149,10 @@ btn1.addEventListener('click', e => {
     btn2Active = false;
     btn3Active = false;
     btn4Active = false;
+    btn1.classList.add('btnActive');
+    btn2.classList.remove('btnActive');
+    btn3.classList.remove('btnActive');
+    btn4.classList.remove('btnActive');
     clearBoard();
     createBoard(8);
 });
@@ -129,6 +162,10 @@ btn2.addEventListener('click', e => {
     btn2Active = true;
     btn3Active = false;
     btn4Active = false;
+    btn1.classList.remove('btnActive');
+    btn2.classList.add('btnActive');
+    btn3.classList.remove('btnActive');
+    btn4.classList.remove('btnActive');
     clearBoard();
     createBoard(16);
 });
@@ -138,6 +175,10 @@ btn3.addEventListener('click', e => {
     btn2Active = false;
     btn3Active = true;
     btn4Active = false;
+    btn1.classList.remove('btnActive');
+    btn2.classList.remove('btnActive');
+    btn3.classList.add('btnActive');
+    btn4.classList.remove('btnActive');
     clearBoard();
     createBoard(32);
 });
@@ -147,6 +188,10 @@ btn4.addEventListener('click', e => {
     btn2Active = false;
     btn3Active = false;
     btn4Active = true;
+    btn1.classList.remove('btnActive');
+    btn2.classList.remove('btnActive');
+    btn3.classList.remove('btnActive');
+    btn4.classList.add('btnActive');
     clearBoard();
     createBoard(64);
 });
@@ -170,7 +215,5 @@ clearBtn.addEventListener('click', e => {
     }
     
 });
-
-
 
 createBoard(16);
