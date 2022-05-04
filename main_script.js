@@ -1,14 +1,6 @@
 // Etch-A-Sketch
 // Made by Postiey :)
 
-// to do type shit
-    // create different themes for the site and have the ability to choose between them
-// Done list
-    // fnished cleargrid button and is working with each of the active boards (if user is on board 32x32 it will clear 
-    // and remake a 32x32 board).
-    // Cleargrid will reset to a 16x16 board
-    // Changed styles of the whole document, added active properties to buttons
-
 const colorPickerBtn = document.querySelector('.colorPicker');
 
 const gridResize = document.querySelector('.gridResize');
